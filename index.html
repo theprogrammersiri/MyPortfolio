@@ -39,27 +39,23 @@
   /* Custom cursor */
   .cursor {
     position: fixed;
-    width: 12px; height: 12px;
+    width: 6px; height: 6px;
     background: var(--gold);
-    border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
-    mix-blend-mode: difference;
+    transition: width 0.12s, height 0.12s;
   }
   .cursor-ring {
     position: fixed;
-    width: 36px; height: 36px;
+    width: 22px; height: 22px;
     border: 1px solid var(--gold);
-    border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
-    transition: transform 0.15s ease-out, width 0.2s, height 0.2s;
     opacity: 0.5;
+    transition: width 0.12s, height 0.12s;
   }
-  body:hover .cursor { opacity: 1; }
 
   /* Noise overlay */
   body::before {
@@ -712,6 +708,139 @@
   .cert-org { font-family: var(--mono); font-size: 0.65rem; color: var(--dust); letter-spacing: 0.08em; margin-top: 0.2rem; }
   .cert-year { font-family: var(--mono); font-size: 0.7rem; color: var(--gold); }
 
+  /* SOCIAL / CONTENT SECTION */
+  .social-section {
+    padding: 8rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .social-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: end;
+  }
+  .social-header h2 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .social-header h2 em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+  }
+  .social-header p {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--dust);
+    font-size: 1rem;
+    line-height: 1.7;
+    padding-bottom: 0.3rem;
+  }
+  .social-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--mist);
+    border: 1px solid var(--mist);
+  }
+  .social-card {
+    background: var(--ink2);
+    padding: 3rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .social-card:hover { background: var(--ink3); }
+  .social-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+  }
+  .social-card:hover::before { transform: scaleY(1); }
+  .social-card-platform {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .social-card-icon {
+    width: 44px; height: 44px;
+    border: 1px solid var(--mist);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .social-card:hover .social-card-icon {
+    border-color: var(--gold);
+    background: rgba(232,197,71,0.08);
+  }
+  .social-card-platform-name {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .social-card-handle {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .social-card-desc {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--dust);
+    line-height: 1.7;
+    flex: 1;
+  }
+  .social-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--mist);
+  }
+  .social-card-topic {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .social-card-cta {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+    transition: gap 0.2s;
+  }
+  .social-card:hover .social-card-cta { gap: 0.7rem; }
+
   /* CONTACT */
   .contact-section {
     padding: 10rem 4rem;
@@ -952,6 +1081,9 @@
     .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
     .gallery-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
     .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+    .social-section { padding: 4rem 2rem; }
+    .social-header { grid-template-columns: 1fr; gap: 1rem; }
+    .social-cards { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -967,8 +1099,8 @@
     <li><a href="#story">About</a></li>
     <li><a href="#design">Design</a></li>
     <li><a href="#gallery">Rug Work</a></li>
-    <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#social">Content</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -981,7 +1113,7 @@
       Srijan<br/><em>Maharjan</em>
     </h1>
     <p class="hero-tagline fade-up delay-3">
-      Building digital things from the ground up — code, craft, and a whole lot of curiosity. Based in Kathmandu, open to the world.
+      Crafting visual identities, interfaces, and experiences — from pixel to print. Based in Kathmandu, open to the world.
     </p>
     <div class="hero-cta fade-up delay-4">
       <a href="#design" class="btn-primary">See My Work</a>
@@ -1056,7 +1188,7 @@
       Then came code. Pursuing a BScIT at Presidential Graduate School (affiliated with Westcliff University, California), I discovered that building for the web was the closest thing to pure creative freedom I'd ever found. From crafting responsive UIs to exploring cloud infrastructure on AWS, I've spent every semester pushing what I can build.
     </p>
     <p>
-      Today I'm a final-year student sitting at the intersection of <strong>design and development</strong> — someone who cares just as much about how something looks as how it works. I speak three languages, hold AWS certifications, and believe the best digital experiences come from people who think in systems but feel in stories.
+      Today I'm a <strong>BScIT graduate</strong> sitting at the intersection of <strong>design and development</strong> — someone who cares just as much about how something looks as how it works. I speak three languages, hold AWS certifications, and believe the best digital experiences come from people who think in systems but feel in stories.
     </p>
   </div>
 </section>
@@ -1295,10 +1427,10 @@
           <div class="tl-desc">Designing custom Tibetan rugs using Photoshop for international and domestic clients. Where my eye for detail was born.</div>
         </div>
         <div class="timeline-item">
-          <div class="tl-period">Apr 2022 — Present</div>
-          <div class="tl-title">BScIT Student</div>
+          <div class="tl-period">Apr 2022 — Apr 2026</div>
+          <div class="tl-title">BScIT Graduate</div>
           <div class="tl-org">Presidential Graduate School (Westcliff University)</div>
-          <div class="tl-desc">Studying Information Technology with a focus on web development, cloud, and design systems.</div>
+          <div class="tl-desc">Graduated with a Bachelor of Science in Information Technology. Focus on web development, cloud, and design systems.</div>
         </div>
         <div class="timeline-item">
           <div class="tl-period">Jul 2018 — Mar 2020</div>
@@ -1366,6 +1498,56 @@
   </div>
 </section>
 
+<!-- SOCIAL CONTENT -->
+<section class="social-section" id="social">
+  <div class="social-header">
+    <div>
+      <p class="section-label" style="margin-bottom:1rem;">06 — Content</p>
+      <h2>Beyond the<br/><em>screen</em></h2>
+    </div>
+    <p>Outside of design and code, I run a football content brand called <strong style="color:var(--paper);font-family:var(--display);">Almost Ball</strong> — breaking down the game through short-form video across TikTok and Instagram. It's where my creative instincts meet my love for the sport.</p>
+  </div>
+  <div class="social-cards">
+
+    <a href="https://www.tiktok.com/@almostball" target="_blank" class="social-card">
+      <div class="social-card-platform">
+        <div class="social-card-icon">▶</div>
+        <span class="social-card-platform-name">TikTok</span>
+      </div>
+      <div class="social-card-handle">@almostball</div>
+      <div class="social-card-desc">Short-form football content — tactics, moments, and knowledge broken down for fans who want to understand the game on a deeper level.</div>
+      <div class="social-card-footer">
+        <div class="social-card-topic">
+          <span class="tag">Football</span>
+          <span class="tag">Short-form Video</span>
+          <span class="tag">Content Creation</span>
+        </div>
+        <span class="social-card-cta">Visit ↗</span>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/almost.ball.knowledge/" target="_blank" class="social-card">
+      <div class="social-card-platform">
+        <div class="social-card-icon">◎</div>
+        <span class="social-card-platform-name">Instagram</span>
+      </div>
+      <div class="social-card-handle">@almost.ball.knowledge</div>
+      <div class="social-card-desc">Visual football storytelling — graphics, carousels, and knowledge posts exploring the tactical and cultural side of the beautiful game.</div>
+      <div class="social-card-footer">
+        <div class="social-card-topic">
+          <span class="tag">Football</span>
+          <span class="tag">Visual Content</span>
+          <span class="tag">Graphics</span>
+        </div>
+        <span class="social-card-cta">Visit ↗</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div class="contact-bg-text">HELLO</div>
@@ -1394,13 +1576,15 @@
 <script>
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
-  function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); }
-  animRing();
-  document.querySelectorAll('a, button, .figma-card, .frontend-card, .gallery-item, .skill-cell').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.style.width='20px'; cursor.style.height='20px'; ring.style.width='56px'; ring.style.height='56px'; });
-    el.addEventListener('mouseleave', () => { cursor.style.width='12px'; cursor.style.height='12px'; ring.style.width='36px'; ring.style.height='36px'; });
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button, .figma-card, .frontend-card, .gallery-item, .skill-cell, .social-card').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.width='10px'; cursor.style.height='10px'; ring.style.width='36px'; ring.style.height='36px'; });
+    el.addEventListener('mouseleave', () => { cursor.style.width='6px'; cursor.style.height='6px'; ring.style.width='22px'; ring.style.height='22px'; });
   });
 
   // Gallery lightbox
